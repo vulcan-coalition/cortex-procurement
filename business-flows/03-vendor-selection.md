@@ -84,6 +84,48 @@ Reference: Scorecard for RFQ-2024-0078 (IT Equipment — 4 items)
 
 **Decision:** Award to TechPlus Co., Ltd. — proceed to PO issuance.
 
+## Decision Output Format
+
+When this step is executed (by a human evaluator or an AI agent), the deliverable must include all of the following — not just a single winner pick. The goal is to show the approver the trade-off space, not only the final choice.
+
+### 1. Alternative Award Options
+
+Present **at least three distinct alternatives**. Typical options:
+
+- (a) **Single-vendor award to the rank-1 vendor** — the entire basket goes to the highest weighted score.
+- (b) **Single-vendor award to the runner-up** — the entire basket goes to rank 2, used when the margin is narrow or when the rank-1 vendor has an open risk flag.
+- (c) **Line-by-line split award** — each line item goes to its best-fit vendor (peripheral specialist, lowest price on that item, lowest risk for that category, etc.).
+
+Add more alternatives when the situation warrants — for example **staggered delivery**, **pilot-then-scale**, or **conditional award** pending a certification upgrade.
+
+For every alternative, document:
+
+| Field | Description |
+|---|---|
+| Short reason | 1–2 sentences capturing the headline trade-off. |
+| Detailed reason | One paragraph covering scoring implications, operational impact, risk exposure, compliance considerations, and any historical-performance evidence. |
+| Confidence | A decimal between **0.01 and 1.00** expressing the evaluator's confidence that this alternative is the right choice given the data. Use the full range; do not anchor around a single value. |
+
+### 2. Primary Recommendation
+
+Name which alternative to proceed with. This is typically the highest-confidence option. If a lower-confidence alternative is chosen, state the reason explicitly (policy constraint, risk appetite, strategic supplier development, etc.).
+
+### 3. Vendor Contact and Contract Details
+
+For every vendor named in the primary recommendation — and for every vendor named in a split-award alternative if that is chosen — attach the full profile required for [Step 4: Contract & Negotiation](04-contract-and-negotiation.md) and [Step 5: Purchase Order](05-purchase-order.md). Sourced from [vendors.json](../mock-data/vendors.json).
+
+Required fields:
+
+- Vendor ID and legal name
+- Registered address
+- Tax ID
+- Contact phone and email
+- Bank account (bank, branch, account number, account name)
+- Categories and certifications
+- Risk score and current status
+
+Attaching this up-front avoids a second round-trip to the Vendor Master before the contract can be drafted or the PO can be issued.
+
 ## Approval Chain
 
 | Role | Responsibility |
