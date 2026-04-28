@@ -2,6 +2,34 @@
 
 This knowledge base documents the Procure-to-Pay (P2P) business domain for the development team. All content is derived from internal procurement training materials.
 
+## Skills (AI Agent Prompts)
+
+Prompt files for Claude Cowork. Each skill is a standalone instruction set that references `context.md` for business knowledge and connects to mock-data (or MCP) for data access.
+
+**Usage in Cowork:** Load `context.md` as project context + one skill file per session.
+
+### Flow
+
+```
+02-vendor-research → 02a-email-preparation → 02b-email-follow-up (loop) → 03-vendor-selection
+                                                                                    ↓
+                                                          08-vendor-measurement ← (after delivery & payment)
+                                                                    ↓
+                                                          09-status-dashboard
+```
+
+### Files
+
+| File | Purpose |
+|------|---------|
+| [context.md](skills/context.md) | Shared context: company profile, personas, policies, business rules, data schemas |
+| [02-vendor-research.skill.md](skills/02-vendor-research.skill.md) | Search existing + discover new vendors online for a PR |
+| [02a-email-preparation.skill.md](skills/02a-email-preparation.skill.md) | Analyze data gaps, draft outreach emails, create RFx document |
+| [02b-email-follow-up.skill.md](skills/02b-email-follow-up.skill.md) | Process vendor email replies, extract data, follow up until complete |
+| [03-vendor-selection.skill.md](skills/03-vendor-selection.skill.md) | Score vendors (two-phase: proposal + track record), produce ranked alternatives |
+| [08-vendor-measurement.skill.md](skills/08-vendor-measurement.skill.md) | Calculate vendor KPIs from transaction data |
+| [09-status-dashboard.skill.md](skills/09-status-dashboard.skill.md) | Vendor profile monitoring dashboard |
+
 ## Business Flows
 
 The P2P cycle consists of 8 main processes:
