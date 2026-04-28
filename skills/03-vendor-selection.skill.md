@@ -19,7 +19,7 @@ Read these mock-data files (will be replaced by MCP connection in future):
 - `mock-data/goods-receipt-notes.json` — historical delivery performance for due diligence
 - `mock-data/tax-invoices.json` — historical invoice accuracy for due diligence
 
-Additionally, accept **discovered vendor data** from `02-sourcing.skill.md` output. These are new vendors found online that may have incomplete data.
+Additionally, accept **discovered vendor data** from `02a-email-preparation.skill.md` output. These are new vendors found online that may have incomplete data.
 
 Resolve `vendorId` from RFQ's `sentTo` → `vendors.json` for existing vendor profiles. Cross-reference GRN and Invoice data for historical performance. For discovered vendors, use the data provided from the sourcing step.
 
@@ -28,7 +28,7 @@ Resolve `vendorId` from RFQ's `sentTo` → `vendors.json` for existing vendor pr
 - **An RFQ number** (e.g., `RFQ-2024-0078`) → evaluate vendors from this RFQ
 - **An RFP number** (e.g., `RFP-2024-0012`) → evaluate proposal submissions
 - **Vendor response data** — additional scoring input or quotes from user
-- **Discovered vendor data** — new vendor profiles from `02-sourcing.skill.md` output (may have incomplete fields)
+- **Discovered vendor data** — new vendor profiles from `02a-email-preparation.skill.md` output (may have incomplete fields)
 
 ## Business Rules
 

@@ -1,4 +1,4 @@
-# Vendor Outreach Follow-Up — Procurement Skill
+# Email Follow-Up — Procurement Skill
 
 ## Role
 
@@ -6,14 +6,14 @@ You are a Procurement Coordinator handling vendor communication. Refer to `conte
 
 ## Context
 
-Read `context.md` before executing. This is a sub-process of Step 2 (Sourcing). After the initial outreach emails were sent by `02-sourcing.skill.md`, vendors reply with information. Your job is to read their replies, extract data, update the vendor profile, and follow up if data is still incomplete.
+Read `context.md` before executing. This is the third sub-step of Step 2 (Sourcing). After outreach emails were sent by `02a-email-preparation.skill.md`, vendors reply with information. Your job is to read their replies, extract data, update the vendor profile, and follow up if data is still incomplete.
 
 Refer to `context.md` → Section 3 (Email Follow-Up Loop) for the full process and rules.
 
 ## Data Source
 
 **Input data from previous steps:**
-- Discovered vendor profiles from `02-sourcing.skill.md` output (with `missingFields` and `outreachStatus`)
+- Discovered vendor profiles from `02a-email-preparation.skill.md` output (with `missingFields` and `outreachStatus`)
 
 **Vendor reply (provided by user):**
 - Email body text
@@ -29,7 +29,7 @@ The user provides:
 
 - **Vendor email reply** — the email content from a vendor (copy-pasted or forwarded)
 - **Attachments** — documents the vendor sent (catalogs, certifications, price lists, company profiles)
-- **Current vendor profile** — the discovered vendor JSON from the sourcing step (so you know what's already collected and what's still missing)
+- **Current vendor profile** — the discovered vendor JSON from the previous step (so you know what's already collected and what's still missing)
 
 ## Process Steps
 
@@ -88,8 +88,9 @@ Compare the updated profile against required fields for evaluation:
 2. Reference previous correspondence ("Thank you for providing X. We still need Y and Z.")
 3. One email per vendor, per round
 4. Professional and concise tone — vendors should not feel interrogated
-5. Max 3 follow-up rounds before marking as unresponsive
+5. Max 3 follow-up rounds before marking as unresponsive (configurable in `context.md` → Section 6)
 6. Extract data from any format — don't skip attachments
+7. Use email language per `context.md` → Section 6 (Outreach Settings)
 
 ## Output Format
 
@@ -163,3 +164,7 @@ Compare the updated profile against required fields for evaluation:
 - Run this skill each time a vendor replies to an outreach email
 - When `dataComplete: true` or `outreachStatus: "unresponsive"` for all vendors → proceed to `03-vendor-selection.skill.md`
 - Updated vendor profiles feed into the selection step's discovered vendor input
+
+```
+02-vendor-research → 02a-email-preparation → 02b-email-follow-up (loop) → 03-vendor-selection
+```

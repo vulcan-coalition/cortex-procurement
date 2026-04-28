@@ -81,5 +81,5 @@ List: high risk, partial deliveries, rejections, blacklisted, missing certificat
 
 Based on findings, suggest:
 - Underperforming vendor → run `08-vendor-measurement.skill.md` for detailed KPI analysis
-- New sourcing need → run `02-sourcing.skill.md`
+- New sourcing need → run `02-vendor-research.skill.md`
 - Vendor comparison → run `03-vendor-selection.skill.md`

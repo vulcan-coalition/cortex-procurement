@@ -74,5 +74,5 @@ Apply all KPI formulas and targets from `context.md` → Section 5 (Vendor KPIs)
 ## Chaining
 
 - KPI results feed into → `09-status-dashboard.skill.md` for vendor profile view
-- Performance flags inform → `02-sourcing.skill.md` when selecting vendors for future RFx
+- Performance flags inform → `02-vendor-research.skill.md` when selecting vendors for future RFx
 - Historical scores support → `03-vendor-selection.skill.md` during due diligence
