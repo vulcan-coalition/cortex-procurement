@@ -23,12 +23,34 @@ Prompt files for Claude Cowork. Each skill is a standalone instruction set that 
 | File | Purpose |
 |------|---------|
 | [context.md](skills/context.md) | Shared context: company profile, personas, policies, business rules, data schemas |
-| [02-vendor-research.skill.md](skills/02-vendor-research.skill.md) | Search existing + discover new vendors online for a PR |
-| [02a-email-preparation.skill.md](skills/02a-email-preparation.skill.md) | Analyze data gaps, draft outreach emails, create RFx document |
+| [02-vendor-research.skill.md](skills/02-vendor-research.skill.md) | Search existing + discover new vendors, gap analysis, RFx creation |
+| [02a-email-preparation.skill.md](skills/02a-email-preparation.skill.md) | Draft outreach emails for vendors with missing data |
 | [02b-email-follow-up.skill.md](skills/02b-email-follow-up.skill.md) | Process vendor email replies, extract data, follow up until complete |
 | [03-vendor-selection.skill.md](skills/03-vendor-selection.skill.md) | Score vendors (two-phase: proposal + track record), produce ranked alternatives |
 | [08-vendor-measurement.skill.md](skills/08-vendor-measurement.skill.md) | Calculate vendor KPIs from transaction data |
 | [09-status-dashboard.skill.md](skills/09-status-dashboard.skill.md) | Vendor profile monitoring dashboard |
+
+## Prompts (OpenAI Chat-Completion)
+
+Standalone system prompts for single-call LLM engines (OpenAI, etc.). No file access, no tools — all data passed as JSON input, all results returned as JSON output.
+
+| File | Purpose |
+|------|---------|
+| [02-vendor-research.prompt.md](prompts/02-vendor-research.prompt.md) | Research vendors, gap analysis, RFx creation |
+| [02a-email-preparation.prompt.md](prompts/02a-email-preparation.prompt.md) | Draft outreach emails (email drafting only) |
+| [02b-email-follow-up.prompt.md](prompts/02b-email-follow-up.prompt.md) | Process vendor replies, extract data, draft follow-ups |
+| [03-vendor-selection.prompt.md](prompts/03-vendor-selection.prompt.md) | Two-phase vendor scoring with ranked alternatives |
+| [08-vendor-measurement.prompt.md](prompts/08-vendor-measurement.prompt.md) | Calculate vendor KPIs from transaction data |
+| [09-status-dashboard.prompt.md](prompts/09-status-dashboard.prompt.md) | Vendor profile monitoring dashboard |
+
+### Skills vs Prompts
+
+| | `skills/` | `prompts/` |
+|---|---|---|
+| Runtime | Claude Code / Cowork (multi-step, file access) | OpenAI chat-completion (single call, stateless) |
+| Context | References `context.md` | Business rules embedded inline |
+| Data | Reads mock-data files or MCP | All data in input JSON |
+| Output | JSON + markdown summary | JSON only |
 
 ## Business Flows
 
