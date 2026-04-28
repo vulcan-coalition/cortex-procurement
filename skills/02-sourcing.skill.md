@@ -52,8 +52,8 @@ If an RFI exists with `shortlistedVendors`, use that list for RFQ/RFP `sentTo`.
 3. Draft **one email per vendor** that requests **all** missing data for that vendor in a single message. Never split requests across multiple emails.
 
 **Email composition rules:**
-- **Subject line:** Clear and specific — include company name and purpose (e.g., "ABC Co., Ltd. — Request for Supplier Information: IT Equipment")
-- **Opening:** Professional introduction of your company and the procurement context. Mention how you found the vendor (website, directory, referral).
+- **Subject line:** Clear and specific — use company name from `context.md` → Section 0 (e.g., "ABC Co., Ltd. — Request for Supplier Information: IT Equipment")
+- **Opening:** Professional introduction using company details from `context.md` → Section 0. Mention how you found the vendor (website, directory, referral).
 - **Body — Data requests:** List every missing data point as a numbered or bulleted list. Be specific about what format is needed. Group related requests:
   - Product & Pricing: unit prices for specific items, MOQ, trade conditions, volume discounts
   - Company Profile: years in business, number of clients, company registration
@@ -63,7 +63,7 @@ If an RFI exists with `shortlistedVendors`, use that list for RFQ/RFP `sentTo`.
   - Payment: accepted payment terms, bank account details
 - **Closing:** Provide a clear response deadline. Include contact person name and email for questions. Thank the vendor.
 - **Tone:** Professional, respectful, and concise. The vendor should understand exactly what is needed and why.
-- **Language:** Match the vendor's business language if known (e.g., Thai for Thai vendors, English for international)
+- **Language:** Use language per `context.md` → Section 6 (Outreach Settings): Thai for Thai vendors, English for international
 
 ### Step D: Unified Candidate List
 1. Merge existing vendors (`source: "existing"`) and discovered vendors (`source: "discovered"`) into one list

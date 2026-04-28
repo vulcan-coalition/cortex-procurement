@@ -3,6 +3,47 @@
 
 # Procurement Context — Business Knowledge for AI Skills
 
+## 0. Company Profile
+
+### Company Identity
+- **Company Name:** ABC Co., Ltd.
+- **Industry:** [to be filled — e.g., Manufacturing, Technology, Retail]
+- **Company Size:** [to be filled — e.g., 500 employees, mid-size enterprise]
+- **Headquarters:** 123 Sukhumvit Road, Khlong Toei, Bangkok 10110
+- **Tax ID:** 0-1055-64001-23-4
+- **Phone:** 02-xxx-xxxx
+- **Email (General):** info@abc.co.th
+- **Email (Procurement):** procurement@abc.co.th
+- **Email (Purchase):** purchase@abc.co.th
+
+### Procurement Scope
+- **Categories Commonly Purchased:** IT Equipment, Office Equipment, Software, Professional Services
+- **Procurement Type:** Primarily Indirect Procurement (operational expenses)
+- **Currency:** THB (Thai Baht)
+- **Preferred Vendor Regions:** Thailand (primary), Southeast Asia (secondary)
+- **Business Language:** Thai (primary), English (secondary — for international vendors)
+
+### Delivery Locations
+| Location | Address | Use For |
+|----------|---------|---------|
+| Head Office | 123 Sukhumvit Road, Khlong Toei, Bangkok 10110 | IT Equipment, Office Supplies |
+| Warehouse | Warehouse Floor 1, Zone B (Head Office building) | Bulk goods, inventory items |
+
+### Budget & Approval Thresholds
+| Amount (THB) | Approval Required |
+|-------------|-------------------|
+| Up to 100,000 | Procurement Manager |
+| 100,001 – 500,000 | Procurement Manager + Department Manager |
+| 500,001 – 1,000,000 | Procurement Manager + CFO |
+| Over 1,000,000 | Procurement Manager + CFO + CEO |
+
+### Procurement Principles
+- Always seek competitive bids — minimum 3 vendors per sourcing round
+- Prioritize total cost of ownership (TCO) over unit price alone
+- Support vendor diversity — actively discover new vendors, do not over-rely on incumbents
+- Maintain transparency and auditability in all procurement decisions
+- Comply with all applicable Thai regulations and tax requirements
+
 ## 1. Personas
 
 | Persona | Responsibilities | Involved In |
@@ -243,21 +284,40 @@ Every evaluation must produce:
 - Low Compliance Score → may trigger removal from approved vendor list
 - Repeated Warranty Claims → reduce quality score in next selection round
 
-## 6. Policies
+## 6. Policies & Configurable Settings
+
+> Settings marked with `[CONFIG]` are adjustable per project, category, or policy update.
+> Update these values when company policy changes. All skills read from this section.
 
 ### Financial
-- VAT rate: 7%
-- Standard payment terms: Net 30 days after receiving goods and GRN
-- Late delivery penalty: 0.1% per day (configurable per contract)
+- `[CONFIG]` VAT rate: **7%**
+- `[CONFIG]` Standard payment terms: **Net 30 days** after receiving goods and GRN
+- `[CONFIG]` Late delivery penalty: **0.1% per day** (configurable per contract)
+- Currency: THB (see Company Profile → Section 0)
+
+### Evaluation Settings
+- `[CONFIG]` Phase 1 (proposal-based) weight: **80%**
+- `[CONFIG]` Phase 2 (track record) weight: **20%**
+- `[CONFIG]` Scoring scale: **1.0–5.0**
+- `[CONFIG]` Minimum vendors to shortlist: **3**
+- `[CONFIG]` Target vendors to shortlist: **3–5**
+- `[CONFIG]` Minimum alternative award options: **3**
+- `[CONFIG]` Neutral score for new vendors (no data): **3.0**
 
 ### Vendor Management
-- Risk score: lower is better. Flag vendors with riskScore >= 2.5 as high-risk
+- `[CONFIG]` High-risk threshold (riskScore): **>= 2.5**
 - Blacklisted vendors: never include in RFx, never recommend for award
-- Vendor shortlist from RFI: target 3-5 vendors
 - Only vendors with status "active" may receive RFx or be awarded
 - Every sourcing round must include a search for new alternative vendors — do not rely solely on existing vendor master
 - New vendors with status "pending" may participate in evaluation but cannot be awarded until onboarded to "active"
 - When comparing existing vs new vendors, clearly label the source and data completeness
+
+### Outreach Settings
+- `[CONFIG]` Max follow-up email rounds: **3**
+- `[CONFIG]` Default response deadline: **14 calendar days**
+- `[CONFIG]` Email language (Thai vendors): **Thai**
+- `[CONFIG]` Email language (international vendors): **English**
+- One email per vendor per round — never batch multiple vendors
 
 ### Approval Chains
 
@@ -270,6 +330,8 @@ Every evaluation must produce:
 1. Procurement Manager
 2. CTO / Project Owner
 3. CFO
+
+**Budget-based (see Company Profile → Section 0 for thresholds)**
 
 ### RFQ Quotation Conditions
 - Prices must include VAT (7%) and be itemized per unit
