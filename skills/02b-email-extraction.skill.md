@@ -1,14 +1,14 @@
-# Email Follow-Up — Procurement Skill
+# Email Extraction — Procurement Skill
 
 ## Role
 
-You are a Procurement Coordinator handling vendor communication. Refer to `context.md` → Section 1 (Personas) for your responsibilities.
+You are a Procurement Coordinator processing vendor email replies. Refer to `context.md` → Section 1 (Personas) for your responsibilities.
 
 ## Context
 
-Read `context.md` before executing. This is the third sub-step of Step 2 (Sourcing). After outreach emails were sent by `02a-email-preparation.skill.md`, vendors reply with information. Your job is to read their replies, extract data, update the vendor profile, and follow up if data is still incomplete.
+Read `context.md` before executing. This skill **only extracts data** from vendor email replies. It does not draft follow-up emails — that is handled by `02c-email-follow-up-draft.skill.md`.
 
-Refer to `context.md` → Section 3 (Email Follow-Up Loop) for the full process and rules.
+After outreach emails were sent by `02a-email-preparation.skill.md`, vendors reply with information. Your job is to read their replies, extract structured data, update the vendor profile, and check completeness.
 
 ## Data Source
 
@@ -60,37 +60,32 @@ Compare the updated profile against required fields for evaluation:
 - Company background (years in business, client references)
 - Bank account details (needed for PO/payment if awarded)
 
-### Step 4: Decide Next Action
+### Step 4: Determine Status
 
 **If all minimum + preferred fields are filled:**
 - Set `dataComplete: true`
 - Set `outreachStatus: "complete"`
-- Report: vendor is ready for selection
 
 **If minimum fields are filled but preferred fields missing:**
 - Set `dataComplete: false`
 - Set `outreachStatus: "in_progress"`
-- Draft a follow-up email requesting the specific missing preferred fields
 - Note: vendor can enter selection with partial data (scored accordingly in Phase 2)
 
 **If minimum fields are still missing:**
 - Set `dataComplete: false`
 - Set `outreachStatus: "in_progress"`
-- Draft a follow-up email requesting the specific missing minimum fields — flag as priority
+- Flag missing minimum fields as priority
 
 **If outreachRound >= 3 and still incomplete:**
 - Set `outreachStatus: "unresponsive"`
-- Report: vendor has not provided required data after 3 rounds — proceed with available data or exclude
+- Report: proceed with available data or exclude
 
 ## Business Rules
 
-1. Only request data that is actually still missing — never re-ask for received data
-2. Reference previous correspondence ("Thank you for providing X. We still need Y and Z.")
-3. One email per vendor, per round
-4. Professional and concise tone — vendors should not feel interrogated
-5. Max 3 follow-up rounds before marking as unresponsive (configurable in `context.md` → Section 6)
-6. Extract data from any format — don't skip attachments
-7. Use email language per `context.md` → Section 6 (Outreach Settings)
+1. Extract data from any format — don't skip attachments
+2. Map extracted data to the correct vendor profile fields
+3. Do NOT draft follow-up emails — that is a separate skill
+4. Max 3 outreach rounds before marking as unresponsive (configurable in `context.md` → Section 6)
 
 ## Output Format
 
@@ -104,14 +99,8 @@ Compare the updated profile against required fields for evaluation:
   "source": "discovered",
   "status": "pending",
   "outreachStatus": "complete|in_progress|unresponsive",
-  "outreachRound": 1,
+  "outreachRound": 2,
   "dataComplete": true,
-  "discoveredFrom": "...",
-  "categories": [],
-  "certifications": [],
-  "contactEmail": "...",
-  "contactPhone": "...",
-  "website": "...",
   "availableData": {
     "pricing": true,
     "certifications": true,
@@ -120,25 +109,13 @@ Compare the updated profile against required fields for evaluation:
   },
   "missingFields": ["deliveryTerms"],
   "collectedData": {
-    "fieldName": { "value": "...", "source": "email body|attachment filename|previous round" }
+    "pricing": { "value": "72,000 THB per unit", "source": "price_list.xlsx" },
+    "certifications": { "value": "ISO 9001:2015", "source": "company_profile.pdf" }
   }
 }
 ```
 
-**2. Follow-Up Email (if needed):**
-
-```json
-{
-  "toVendor": "vendor name",
-  "toEmail": "...",
-  "subject": "Re: [previous subject]",
-  "outreachRound": 2,
-  "missingDataRequested": ["field1", "field2"],
-  "emailBody": "full professional email text referencing previous correspondence"
-}
-```
-
-**3. Data Extraction Log:**
+**2. Extraction Log:**
 
 ```json
 {
@@ -146,7 +123,7 @@ Compare the updated profile against required fields for evaluation:
   "dataExtracted": [
     { "field": "certifications", "value": "ISO 9001", "extractedFrom": "attached PDF - company_profile.pdf" }
   ],
-  "dataStillMissing": ["field1", "field2"],
+  "dataStillMissing": ["deliveryTerms"],
   "nextAction": "follow_up|ready_for_selection|mark_unresponsive"
 }
 ```
@@ -155,16 +132,14 @@ Compare the updated profile against required fields for evaluation:
 
 - **Data Received** — what the vendor provided and from which source (email body vs attachment)
 - **Profile Update** — which fields were filled, what changed
-- **Completeness Status** — % complete, what's still missing
-- **Next Action** — ready for selection / follow-up email drafted / marked unresponsive
-- **Follow-Up Email Preview** — if applicable, show the email for review before sending
+- **Completeness Status** — % complete, what's still missing, minimum vs preferred gaps
+- **Next Action** — ready for selection / needs follow-up / marked unresponsive
 
 ## Chaining
 
-- Run this skill each time a vendor replies to an outreach email
-- When `dataComplete: true` or `outreachStatus: "unresponsive"` for all vendors → proceed to `03-vendor-selection.skill.md`
-- Updated vendor profiles feed into the selection step's discovered vendor input
+```
+02-vendor-research → 02a-email-preparation → [02b-email-extraction → 02c-email-follow-up-draft] (loop) → 03-vendor-selection
+```
 
-```
-02-vendor-research → 02a-email-preparation → 02b-email-follow-up (loop) → 03-vendor-selection
-```
+- Output feeds into → `02c-email-follow-up-draft.skill.md` if `nextAction: "follow_up"`
+- Output feeds into → `03-vendor-selection.skill.md` if `nextAction: "ready_for_selection"`

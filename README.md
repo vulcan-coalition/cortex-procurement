@@ -11,11 +11,11 @@ Prompt files for Claude Cowork. Each skill is a standalone instruction set that 
 ### Flow
 
 ```
-02-vendor-research → 02a-email-preparation → 02b-email-follow-up (loop) → 03-vendor-selection
-                                                                                    ↓
-                                                          08-vendor-measurement ← (after delivery & payment)
-                                                                    ↓
-                                                          09-status-dashboard
+02-vendor-research → 02a-email-preparation → [02b-email-extraction → 02c-email-follow-up-draft] (loop) → 03-vendor-selection
+                                                                                                              ↓
+                                                                                08-vendor-measurement ← (after delivery & payment)
+                                                                                          ↓
+                                                                                09-status-dashboard
 ```
 
 ### Files
@@ -25,7 +25,8 @@ Prompt files for Claude Cowork. Each skill is a standalone instruction set that 
 | [context.md](skills/context.md) | Shared context: company profile, personas, policies, business rules, data schemas |
 | [02-vendor-research.skill.md](skills/02-vendor-research.skill.md) | Search existing + discover new vendors, gap analysis, RFx creation |
 | [02a-email-preparation.skill.md](skills/02a-email-preparation.skill.md) | Draft outreach emails for vendors with missing data |
-| [02b-email-follow-up.skill.md](skills/02b-email-follow-up.skill.md) | Process vendor email replies, extract data, follow up until complete |
+| [02b-email-extraction.skill.md](skills/02b-email-extraction.skill.md) | Extract data from vendor email replies, update vendor profile |
+| [02c-email-follow-up-draft.skill.md](skills/02c-email-follow-up-draft.skill.md) | Draft follow-up emails for remaining missing data |
 | [03-vendor-selection.skill.md](skills/03-vendor-selection.skill.md) | Score vendors (two-phase: proposal + track record), produce ranked alternatives |
 | [08-vendor-measurement.skill.md](skills/08-vendor-measurement.skill.md) | Calculate vendor KPIs from transaction data |
 | [09-status-dashboard.skill.md](skills/09-status-dashboard.skill.md) | Vendor profile monitoring dashboard |
@@ -38,7 +39,8 @@ Standalone system prompts for single-call LLM engines (OpenAI, etc.). No file ac
 |------|---------|
 | [02-vendor-research.prompt.md](prompts/02-vendor-research.prompt.md) | Research vendors, gap analysis, RFx creation |
 | [02a-email-preparation.prompt.md](prompts/02a-email-preparation.prompt.md) | Draft outreach emails (email drafting only) |
-| [02b-email-follow-up.prompt.md](prompts/02b-email-follow-up.prompt.md) | Process vendor replies, extract data, draft follow-ups |
+| [02b-email-extraction.prompt.md](prompts/02b-email-extraction.prompt.md) | Extract data from vendor email replies |
+| [02c-email-follow-up-draft.prompt.md](prompts/02c-email-follow-up-draft.prompt.md) | Draft follow-up emails for missing data |
 | [03-vendor-selection.prompt.md](prompts/03-vendor-selection.prompt.md) | Two-phase vendor scoring with ranked alternatives |
 | [08-vendor-measurement.prompt.md](prompts/08-vendor-measurement.prompt.md) | Calculate vendor KPIs from transaction data |
 | [09-status-dashboard.prompt.md](prompts/09-status-dashboard.prompt.md) | Vendor profile monitoring dashboard |

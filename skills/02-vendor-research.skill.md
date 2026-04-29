@@ -79,10 +79,12 @@ If an RFI exists with `shortlistedVendors`, use that list as existing candidates
 4. Target at least 2-3 new vendors per sourcing round
 5. Never include blacklisted vendors in the candidate list
 6. New vendors with incomplete data are acceptable — mark gaps clearly
-7. RFI shortlist should produce 3-5 vendors
-8. RFQ must include detailed specs from PR line items
-9. RFP evaluation criteria weights must total 100%
-10. Never include blacklisted vendors in `sentTo`
+7. Every collected data point for discovered vendors must include confidence, source, and justification — see `context.md` → Section 3 (Data Confidence Rules)
+8. If no specific source can be cited for a data point, set the value to `null` — never guess or hallucinate
+9. RFI shortlist should produce 3-5 vendors
+10. RFQ must include detailed specs from PR line items
+11. RFP evaluation criteria weights must total 100%
+12. Never include blacklisted vendors in `sentTo`
 
 ## Output Format
 
@@ -129,7 +131,21 @@ If an RFI exists with `shortlistedVendors`, use that list as existing candidates
     "outreachEmailPlanned": true,
     "outreachStatus": "not_needed|awaiting_reply",
     "outreachRound": 0,
-    "dataComplete": true
+    "dataComplete": true,
+    "collectedData": {
+      "pricing": {
+        "value": "72,000 THB/unit for Laptop",
+        "confidence": 0.5,
+        "source": "https://vendor-website.com/products/laptop-i7",
+        "justification": "Price listed on product page but may be consumer retail price, not B2B"
+      },
+      "companyProfile": {
+        "value": "Established 2015, 80 employees",
+        "confidence": 0.8,
+        "source": "https://vendor-website.com/about",
+        "justification": "From vendor's official About page"
+      }
+    }
   }
 ]
 ```
@@ -174,11 +190,11 @@ If an RFI exists with `shortlistedVendors`, use that list as existing candidates
 **If vendors have missing data:**
 
 ```
-02-vendor-research → 02a-email-preparation → 02b-email-follow-up (loop) → 03-vendor-selection
+02-vendor-research → 02a-email-preparation → [02b-email-extraction → 02c-email-follow-up-draft] (loop) → 03-vendor-selection
 ```
 
 - Pass the Email Preparation Input to `02a-email-preparation.skill.md` for email drafting
-- After emails are sent, run `02b-email-follow-up.skill.md` for reply processing
+- After emails are sent, run `02b-email-extraction.skill.md` for reply processing
 
 **If all data is available:**
 

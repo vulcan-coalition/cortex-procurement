@@ -78,14 +78,14 @@ Draft **one email per vendor** that requests **all** missing data in a single me
 - **Emails Drafted** — count and list of vendors
 - **Email Previews** — full text of each outreach email for review before sending
 - **Flagged Vendors** — any vendors skipped due to missing contact email
-- **Next Step** — send emails, then run `02b-email-follow-up.skill.md` when vendors reply
+- **Next Step** — send emails, then run `02b-email-extraction.skill.md` when vendors reply
 
 ## Chaining
 
 ```
-02-vendor-research → 02a-email-preparation → 02b-email-follow-up (loop) → 03-vendor-selection
+02-vendor-research → 02a-email-preparation → [02b-email-extraction → 02c-email-follow-up-draft] (loop) → 03-vendor-selection
 ```
 
-- After emails are sent, run `02b-email-follow-up.skill.md` each time a vendor replies
+- After emails are sent, run `02b-email-extraction.skill.md` each time a vendor replies
 - Repeat until all vendors are `dataComplete: true` or `outreachStatus: "unresponsive"`
 - Then proceed to `03-vendor-selection.skill.md`
